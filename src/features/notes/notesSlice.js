@@ -20,22 +20,29 @@ const notesSlice = createSlice({
   initialState,
   reducers: {
     addNote: (state, action) => {
-      state.items.push(action.payload);
-      saveToStorage(state.items);
-    },
+  const newNote = {
+    ...action.payload,
+    timestamp: new Date().toLocaleString(), // Add this line
+  };
+  state.items.push(newNote);
+  saveToStorage(state.items);
+},
+
     deleteNote: (state, action) => {
       state.items = state.items.filter((note) => note.id !== action.payload);
       saveToStorage(state.items);
     },
     updateNote: (state, action) => {
-      const { id, title, note } = action.payload;
-      const existing = state.items.find((n) => n.id === id);
-      if (existing) {
-        existing.title = title;
-        existing.note = note;
-        saveToStorage(state.items);
-      }
-    },
+  const { id, title, note } = action.payload;
+  const existing = state.items.find((n) => n.id === id);
+  if (existing) {
+    existing.title = title;
+    existing.note = note;
+    existing.timestamp = new Date().toLocaleString(); // Add this line
+    saveToStorage(state.items);
+  }
+}
+
   },
 });
 
