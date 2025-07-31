@@ -7,6 +7,7 @@ A simple and elegant Notes App built with **React**, **Redux Toolkit**, and styl
 - ✅ Deleting notes
 - ✅ LocalStorage persistence
 - ✅ Fully responsive design (Mobile & Desktop)
+- ✅ Automatic **date & time** added when a note is created or updated
 
 ---
 
@@ -15,6 +16,7 @@ A simple and elegant Notes App built with **React**, **Redux Toolkit**, and styl
 - 📦 State Management using **Redux Toolkit**
 - 💾 Data saved in **localStorage**
 - 🖌️ Live **edit** within the card
+- 🕒 Automatic **timestamp** shown on every note
 - 🧹 Clean and modern UI using **Tailwind CSS**
 - 📱 Fully **mobile responsive**
 - ⚡ Built using **Vite** for fast development
