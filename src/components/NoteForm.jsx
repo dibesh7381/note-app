@@ -28,7 +28,7 @@ const NoteForm = ({ editingNote, setEditingNote }) => {
     if (!title.trim()) {
       newErrors.title = 'Title is required.';
       isValid = false;
-    } else if (title.trim().length < 10) {
+    } else if (title.trim().length < 5) {
       newErrors.title = 'Title must be at least 5 characters.';
       isValid = false;
     }

@@ -8,6 +8,7 @@ A simple and elegant Notes App built with **React**, **Redux Toolkit**, and styl
 - ✅ LocalStorage persistence
 - ✅ Fully responsive design (Mobile & Desktop)
 - ✅ Automatic **date & time** added when a note is created or updated
+- ✅ Form validation for note title and content (required + minimum length)
 
 ---
 
@@ -20,6 +21,8 @@ A simple and elegant Notes App built with **React**, **Redux Toolkit**, and styl
 - 🧹 Clean and modern UI using **Tailwind CSS**
 - 📱 Fully **mobile responsive**
 - ⚡ Built using **Vite** for fast development
+- ✅ Form validation (Title: min 5 chars, Note: min 10 chars, required fields)  
+- ❌ Error messages shown in red under inputs if validation fails  
 
 ---
 
