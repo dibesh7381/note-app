@@ -27,14 +27,14 @@ A simple and elegant Notes App built with **React**, **Redux Toolkit**, and styl
 
 ### 🖥️ Desktop View
 
-![Desktop View](screenshots/3.png)
+![Desktop View](screenshots/1.png)
 ![Desktop View](screenshots/2.png)
 
 ---
 
 ### 📱 Mobile View
 
-![Mobile view](screenshots/1.png)
+![Mobile view](screenshots/3.png)
 
 ---
 

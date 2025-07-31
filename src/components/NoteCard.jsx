@@ -5,12 +5,12 @@ import { useState } from 'react';
 const NoteCard = ({ note }) => {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
-  const [title, setTitle] = useState(note.title);
+  const [titleText, setTitleText] = useState(note.title);
   const [noteText, setNoteText] = useState(note.note);
 
   const handleUpdate = () => {
-    if (title.trim() && noteText.trim()) {
-      dispatch(updateNote({ id: note.id, title, note: noteText }));
+    if (titleText.trim() && noteText.trim()) {
+      dispatch(updateNote({ id: note.id, title : titleText, note: noteText }));
       setEditMode(false);
     }
   };
@@ -22,8 +22,8 @@ const NoteCard = ({ note }) => {
           <input
             type="text"
             className="p-2 border rounded-md"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={titleText}
+            onChange={(e) => setTitleText(e.target.value)}
           />
           <textarea
             className="p-2 border rounded-md min-h-[80px]"
@@ -39,7 +39,7 @@ const NoteCard = ({ note }) => {
             </button>
             <button
               onClick={() => {
-                setTitle(note.title);
+                setTitleText(note.title);
                 setNoteText(note.note);
                 setEditMode(false);
               }}
