@@ -54,7 +54,6 @@ const NoteCard = ({ note }) => {
           <h2 className="text-lg font-semibold text-blue-700 break-words">{note.title}</h2>
           <p className="text-gray-700 mt-2 whitespace-pre-wrap break-words">{note.note}</p>
 
-          {/* 🕒 Timestamp below note */}
           <p className="text-sm text-gray-500 mt-2">
             🕒 {note.timestamp}
           </p>
