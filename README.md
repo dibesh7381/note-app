@@ -48,3 +48,7 @@ npm run dev
 ```
 
 ---
+
+[Connect with me](https://github.com/dibesh7381)
+
+---
