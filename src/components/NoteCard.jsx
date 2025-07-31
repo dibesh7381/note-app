@@ -7,29 +7,62 @@ const NoteCard = ({ note }) => {
   const [editMode, setEditMode] = useState(false);
   const [titleText, setTitleText] = useState(note.title);
   const [noteText, setNoteText] = useState(note.note);
+  const [errors, setErrors] = useState({ title: '', note: '' });
+
+  const validate = () => {
+    const newErrors = { title: '', note: '' };
+    let isValid = true;
+
+    if (!titleText.trim()) {
+      newErrors.title = 'Title is required.';
+      isValid = false;
+    } else if (titleText.trim().length < 5) {
+      newErrors.title = 'Title must be at least 5 characters.';
+      isValid = false;
+    }
+
+    if (!noteText.trim()) {
+      newErrors.note = 'Note content is required.';
+      isValid = false;
+    } else if (noteText.trim().length < 10) {
+      newErrors.note = 'Note must be at least 10 characters.';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
 
   const handleUpdate = () => {
-    if (titleText.trim() && noteText.trim()) {
-      dispatch(updateNote({ id: note.id, title : titleText, note: noteText }));
-      setEditMode(false);
-    }
+    if (!validate()) return;
+
+    dispatch(updateNote({ id: note.id, title: titleText, note: noteText }));
+    setEditMode(false);
   };
 
   return (
     <div className="w-full max-w-md sm:max-w-lg bg-white shadow-md p-4 rounded-xl relative mx-auto">
       {editMode ? (
         <div className="flex flex-col gap-2">
-          <input
-            type="text"
-            className="p-2 border rounded-md"
-            value={titleText}
-            onChange={(e) => setTitleText(e.target.value)}
-          />
-          <textarea
-            className="p-2 border rounded-md min-h-[80px]"
-            value={noteText}
-            onChange={(e) => setNoteText(e.target.value)}
-          />
+          <div className="flex flex-col">
+            <input
+              type="text"
+              className="p-2 border rounded-md"
+              value={titleText}
+              onChange={(e) => setTitleText(e.target.value)}
+            />
+            {errors.title && <span className="text-red-500 text-sm mt-1">{errors.title}</span>}
+          </div>
+
+          <div className="flex flex-col">
+            <textarea
+              className="p-2 border rounded-md min-h-[80px]"
+              value={noteText}
+              onChange={(e) => setNoteText(e.target.value)}
+            />
+            {errors.note && <span className="text-red-500 text-sm mt-1">{errors.note}</span>}
+          </div>
+
           <div className="flex justify-end gap-2">
             <button
               onClick={handleUpdate}
@@ -41,6 +74,7 @@ const NoteCard = ({ note }) => {
               onClick={() => {
                 setTitleText(note.title);
                 setNoteText(note.note);
+                setErrors({ title: '', note: '' });
                 setEditMode(false);
               }}
               className="bg-gray-300 text-gray-800 px-4 py-1 rounded-md hover:bg-gray-400"
@@ -79,6 +113,7 @@ const NoteCard = ({ note }) => {
 };
 
 export default NoteCard;
+
 
 
 

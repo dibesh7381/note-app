@@ -65,7 +65,7 @@ const noteSlice = createSlice({
          saveToStorage(state.items)
       },
       deleteNote : (state,action) => {
-         state.items =  state.items.filter(i => i.id == action.payload)
+         state.items =  state.items.filter(i => i.id !== action.payload)
          saveToStorage(state.items)
       },
       updateNote : (state,action) => {
