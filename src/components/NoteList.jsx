@@ -2,9 +2,9 @@ import { useSelector } from 'react-redux';
 import NoteCard from './NoteCard';
 
 const NoteList = ({ onEdit }) => {
-  const notes = useSelector((state) => state.notes.items);
+  const notes = useSelector((state) => state.notes.notes); // ✅ corrected
 
-  if (notes.length === 0) {
+  if (!notes || notes.length === 0) {
     return (
       <p className="text-gray-500 text-center mt-6">
         No notes yet. Start writing something!
@@ -24,6 +24,7 @@ const NoteList = ({ onEdit }) => {
 };
 
 export default NoteList;
+
 
 
 

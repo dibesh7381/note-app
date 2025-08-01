@@ -67,27 +67,40 @@ const NoteForm = ({ editingNote, setEditingNote }) => {
       onSubmit={handleSubmit}
       className="w-full max-w-md sm:max-w-lg mx-auto p-4 bg-white shadow-md rounded-md flex flex-col gap-4"
     >
+      {/* Title Input */}
       <div className="flex flex-col">
         <input
           type="text"
           placeholder="Note Title"
-          className="p-2 border rounded-md"
+          className={`p-2 border rounded-md ${errors.title ? 'border-red-500' : ''}`}
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            if (errors.title) {
+              setErrors((prev) => ({ ...prev, title: '' }));
+            }
+          }}
         />
         {errors.title && <span className="text-red-500 text-sm mt-1">{errors.title}</span>}
       </div>
 
+      {/* Note Textarea */}
       <div className="flex flex-col">
         <textarea
           placeholder="Write your note here..."
-          className="p-2 border rounded-md min-h-[100px] resize-none"
+          className={`p-2 border rounded-md min-h-[100px] resize-none ${errors.note ? 'border-red-500' : ''}`}
           value={note}
-          onChange={(e) => setNote(e.target.value)}
+          onChange={(e) => {
+            setNote(e.target.value);
+            if (errors.note) {
+              setErrors((prev) => ({ ...prev, note: '' }));
+            }
+          }}
         />
         {errors.note && <span className="text-red-500 text-sm mt-1">{errors.note}</span>}
       </div>
 
+      {/* Submit Button */}
       <button
         type="submit"
         className="self-center bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
@@ -99,6 +112,7 @@ const NoteForm = ({ editingNote, setEditingNote }) => {
 };
 
 export default NoteForm;
+
 
 
 
