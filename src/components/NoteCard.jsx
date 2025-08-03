@@ -8,41 +8,17 @@ const NoteCard = ({ note }) => {
   const [editMode, setEditMode] = useState(false);
   const [titleText, setTitleText] = useState(note.title);
   const [noteText, setNoteText] = useState(note.note);
-  const [errors, setErrors] = useState({ title: '', note: '' });
-
-  const handleTitleChange = (e) => {
-    const value = e.target.value;
-    setTitleText(value);
-    if (errors.title) {
-      setErrors((prev) => ({ ...prev, title: '' }));
-    }
-  };
-
-  const handleNoteChange = (e) => {
-    const value = e.target.value;
-    setNoteText(value);
-    if (errors.note) {
-      setErrors((prev) => ({ ...prev, note: '' }));
-    }
-  };
+  const [errors, setErrors] = useState({});
 
   const handleUpdate = () => {
     const trimmedTitle = titleText.trim();
     const trimmedNote = noteText.trim();
-    const newErrors = { title: '', note: '' };
-    let hasError = false;
+    const newErrors = {};
 
-    if (trimmedTitle.length < 5) {
-      newErrors.title = 'Title must be at least 5 characters.';
-      hasError = true;
-    }
+    if (trimmedTitle.length < 5) newErrors.title = 'Title must be at least 5 characters.';
+    if (trimmedNote.length < 10) newErrors.note = 'Note must be at least 10 characters.';
 
-    if (trimmedNote.length < 10) {
-      newErrors.note = 'Note must be at least 10 characters.';
-      hasError = true;
-    }
-
-    if (hasError) {
+    if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
@@ -54,7 +30,7 @@ const NoteCard = ({ note }) => {
   const handleCancel = () => {
     setTitleText(note.title);
     setNoteText(note.note);
-    setErrors({ title: '', note: '' });
+    setErrors({});
     setEditMode(false);
   };
 
@@ -65,27 +41,29 @@ const NoteCard = ({ note }) => {
           <div className="flex flex-col">
             <input
               type="text"
-              className="p-2 border rounded-md"
+              className={`p-2 border rounded-md ${errors.title ? 'border-red-500' : ''}`}
               value={titleText}
-              onChange={handleTitleChange}
+              onChange={(e) => {
+                setTitleText(e.target.value);
+                if (errors.title) setErrors((prev) => ({ ...prev, title: '' }));
+              }}
               placeholder="Enter title"
               autoFocus
             />
-            {errors.title && (
-              <span className="text-red-500 text-sm mt-1">{errors.title}</span>
-            )}
+            {errors.title && <span className="text-red-500 text-sm mt-1">{errors.title}</span>}
           </div>
 
           <div className="flex flex-col">
             <textarea
-              className="p-2 border rounded-md min-h-[80px]"
+              className={`p-2 border rounded-md min-h-[80px] ${errors.note ? 'border-red-500' : ''}`}
               value={noteText}
-              onChange={handleNoteChange}
+              onChange={(e) => {
+                setNoteText(e.target.value);
+                if (errors.note) setErrors((prev) => ({ ...prev, note: '' }));
+              }}
               placeholder="Enter your note"
             />
-            {errors.note && (
-              <span className="text-red-500 text-sm mt-1">{errors.note}</span>
-            )}
+            {errors.note && <span className="text-red-500 text-sm mt-1">{errors.note}</span>}
           </div>
 
           <div className="flex justify-end gap-2 mt-2">
